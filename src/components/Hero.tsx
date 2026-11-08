@@ -6,6 +6,7 @@ import { Mark, WhatsAppIcon } from "./Icons";
 import { useContent } from "@/lib/content";
 import { useUI } from "@/lib/ui";
 import { MESSAGES, waHref } from "@/lib/contact";
+import { FestiveLine, FestiveSeal, FestiveSparks } from "./Festive";
 
 // The end of the headline is set in italic: after the last comma ("Done Right."),
 // or else the last sentence. Works for whatever headline the owner saves.
@@ -58,6 +59,7 @@ export function Hero() {
         <div className="hero__glow" aria-hidden="true" />
         <div className="hero__shade" aria-hidden="true" />
         <div className="hero__grain" aria-hidden="true" />
+        <FestiveSparks />
       </div>
       <div className="hero__door" aria-hidden="true" />
 
@@ -67,7 +69,10 @@ export function Hero() {
         <span className="hero__sub">Interior</span>
       </div>
 
+      <FestiveSeal />
+
       <div className="hero__content">
+        <FestiveLine />
         <h1 className="hero__title">
           <span className="line"><span>{splitTitle(hero.title)}</span></span>
         </h1>

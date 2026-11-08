@@ -4,6 +4,7 @@ import "lenis/dist/lenis.css";
 import "./globals.css";
 import { DEFAULTS } from "@/content/defaults";
 import { sized } from "@/lib/img";
+import { FESTIVE_CHECK } from "@/components/Festive";
 
 const serif = Instrument_Serif({
   weight: "400",
@@ -49,6 +50,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preconnect" href="https://images.unsplash.com" />
         {/* Skip the opening curtain before first paint on repeat visits */}
         <script dangerouslySetInnerHTML={{ __html: INTRO_CHECK }} />
+        {/* Diwali + 5 years: shown only until 12 Nov 2026 (see components/Festive.tsx) */}
+        <script dangerouslySetInnerHTML={{ __html: FESTIVE_CHECK }} />
       </head>
       <body>{children}</body>
     </html>

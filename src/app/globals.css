@@ -626,6 +626,94 @@
 .is-loaded .hero__corner { opacity: 1; }
 
 /* ==========================================================================
+   Diwali + 5 years (until 12 Nov 2026; see components/Festive.tsx)
+   ========================================================================== */
+
+.festive-only { display: none; }
+
+/* golden sparks rising like diya light */
+html.festive .fest-sparks { display: block; }
+.fest-sparks { position: absolute; inset: 0; overflow: hidden; pointer-events: none; mix-blend-mode: screen; opacity: 0; transition: opacity 2.4s var(--ease) 1.8s; }
+.is-loaded .fest-sparks { opacity: 1; }
+.fest-sparks i {
+  position: absolute;
+  bottom: -12px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fff1cc 0%, #f4bd62 45%, rgba(244, 189, 98, 0) 72%);
+  box-shadow: 0 0 8px 2px rgba(255, 186, 84, 0.5);
+  opacity: 0;
+  animation: festSpark linear infinite;
+}
+@keyframes festSpark {
+  0% { transform: translate(0, 0) scale(1); opacity: 0; }
+  12% { opacity: 0.95; }
+  55% { transform: translate(calc(var(--drift) * 0.6), calc(var(--rise) * -0.55)) scale(0.8); opacity: 0.7; }
+  100% { transform: translate(var(--drift), calc(var(--rise) * -1)) scale(0.35); opacity: 0; }
+}
+
+/* a small lit diya */
+.diya { position: relative; display: inline-grid; place-items: center; width: 34px; height: 28px; flex: 0 0 auto; }
+.diya svg { position: relative; width: 100%; height: 100%; overflow: visible; }
+.diya__glow { position: absolute; left: 50%; top: 18%; width: 64px; height: 64px; transform: translate(-50%, -50%); border-radius: 50%; background: radial-gradient(circle, rgba(255, 190, 92, 0.55), rgba(255, 190, 92, 0) 62%); animation: diyaGlow 2.8s ease-in-out infinite; pointer-events: none; }
+.diya__flame { fill: #ffbb55; transform-box: fill-box; transform-origin: 50% 100%; animation: diyaFlame 1.6s ease-in-out infinite; }
+.diya__core { fill: #fff3d2; transform-box: fill-box; transform-origin: 50% 100%; animation: diyaFlame 1.6s ease-in-out infinite reverse; }
+.diya__lamp { fill: #b8743e; }
+.diya__rim { fill: none; stroke: #e9c98d; stroke-width: 1.6; stroke-linecap: round; }
+.diya__dots { fill: none; stroke: #f6dfae; stroke-width: 2.2; stroke-linecap: round; }
+@keyframes diyaFlame {
+  0%, 100% { transform: scale(1, 1) skewX(0deg); }
+  25% { transform: scale(0.94, 1.06) skewX(-3deg); }
+  50% { transform: scale(1.04, 0.95) skewX(2deg); }
+  75% { transform: scale(0.97, 1.04) skewX(-1.5deg); }
+}
+@keyframes diyaGlow { 0%, 100% { opacity: 1; transform: translate(-50%, -50%) scale(1); } 50% { opacity: 0.7; transform: translate(-50%, -50%) scale(0.9); } }
+
+/* the line above the headline */
+html.festive .fest-line { display: flex; }
+.fest-line {
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  margin-bottom: 20px;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 1.4s var(--ease) 1.5s, transform 1.4s var(--ease) 1.5s;
+}
+.is-loaded .fest-line { opacity: 1; transform: none; }
+.fest-line em { font-family: var(--font-serif); font-size: clamp(23px, 1.9vw, 29px); line-height: 1; color: #f3d9a4; }
+.fest-line__text { font-size: 11px; font-weight: 500; letter-spacing: 0.26em; margin-right: -0.26em; text-transform: uppercase; color: rgba(255, 255, 255, 0.86); }
+.fest-line__dot { width: 4px; height: 4px; border-radius: 50%; background: var(--color-brass); }
+
+/* the gold "5 Years" seal */
+html.festive .fest-seal { display: grid; }
+.fest-seal {
+  position: absolute;
+  right: var(--gutter);
+  top: 27%;
+  z-index: 2;
+  width: 136px;
+  height: 136px;
+  place-items: center;
+  pointer-events: none;
+  opacity: 0;
+  transform: scale(0.85) rotate(-8deg);
+  transition: opacity 1.6s var(--ease) 2.2s, transform 1.8s var(--ease) 2.2s;
+}
+.is-loaded .fest-seal { opacity: 1; transform: none; }
+.fest-seal::before { content: ""; position: absolute; inset: 22px; border-radius: 50%; border: 1px solid rgba(233, 201, 141, 0.45); background: radial-gradient(circle, rgba(27, 22, 18, 0.55), rgba(27, 22, 18, 0.25)); backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px); }
+.fest-seal__ring { position: absolute; inset: 0; width: 100%; height: 100%; animation: spin 40s linear infinite; }
+.fest-seal__ring text { fill: rgba(243, 217, 164, 0.92); font-family: var(--font-sans); font-size: 8.4px; font-weight: 500; }
+.fest-seal__core { position: relative; display: flex; flex-direction: column; align-items: center; color: #f3d9a4; }
+.fest-seal__core b { font-family: var(--font-serif); font-weight: 400; font-size: 54px; line-height: 0.8; }
+.fest-seal__core small { margin-top: 6px; font-size: 9px; font-weight: 500; letter-spacing: 0.32em; margin-right: -0.32em; text-transform: uppercase; }
+
+@media (prefers-reduced-motion: reduce) {
+  .fest-sparks { display: none !important; }
+  .diya__flame, .diya__core, .diya__glow, .fest-seal__ring { animation: none; }
+}
+
+/* ==========================================================================
    Facts strip
    ========================================================================== */
 
@@ -1518,6 +1606,11 @@ fieldset.field { border: 0; padding: 0; margin: 0; min-width: 0; }
   .hero__sub { font-size: 9px; letter-spacing: 0.5em; margin-right: -0.5em; }
   .hero__content { bottom: calc(24px + env(safe-area-inset-bottom)); }
   .hero__title { font-size: clamp(46px, 13.6vw, 62px); line-height: 1; margin-bottom: 14px; }
+  html.festive .fest-seal { display: none; }
+  .fest-line { gap: 2px 10px; margin-bottom: 14px; }
+  .fest-line em { font-size: 23px; }
+  .fest-line__dot { display: none; }
+  .fest-line__text { flex-basis: 100%; text-align: center; font-size: 9.5px; letter-spacing: 0.22em; margin-right: -0.22em; }
   .hero__lead { font-size: 15.5px; max-width: 22em; margin-bottom: 26px; }
   .hero__lead span { display: block; } /* one sentence per line */
   .hero__actions { flex-direction: column; width: 100%; max-width: 360px; gap: 10px; }
@@ -1629,12 +1722,15 @@ fieldset.field { border: 0; padding: 0; margin: 0; min-width: 0; }
   .hero__content { bottom: clamp(48px, 6vh, 88px); }
   .hero__title { font-size: clamp(64px, 9.4vw, 96px); }
   .hero__lead { font-size: 20px; }
+  .fest-seal { top: auto; bottom: 46%; width: 112px; height: 112px; }
+  .fest-seal__core b { font-size: 44px; }
 }
 
 /* Phones turned sideways: everything fits on one short screen */
 @media (max-height: 520px) and (orientation: landscape) {
   .hero { min-height: 360px; }
   .hero__crest, .hero__lead { display: none; }
+  html.festive .fest-line, html.festive .fest-seal { display: none; }
   .hero__content { bottom: calc(18px + env(safe-area-inset-bottom)); }
   .hero__title { font-size: 44px; margin-bottom: 16px; }
   .hero__actions { flex-direction: row; max-width: none; width: auto; }
